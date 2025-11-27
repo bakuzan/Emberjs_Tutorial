@@ -3,6 +3,7 @@ import Route from '@ember/routing/route';
 const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
 
 interface RawModel {
+  id: string;
   attributes: {
     title: string;
     owner: string;
@@ -24,7 +25,7 @@ export default class IndexRoute extends Route {
     let { data } = await response.json();
 
     return data.map((model: RawModel) => {
-      let { attributes } = model;
+      let { id, attributes } = model;
       let type;
 
       if (COMMUNITY_CATEGORIES.includes(attributes.category)) {
@@ -33,7 +34,7 @@ export default class IndexRoute extends Route {
         type = 'Standalone';
       }
 
-      return { type, ...attributes };
+      return { id, type, ...attributes };
     });
   }
 }
