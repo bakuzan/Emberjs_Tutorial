@@ -5,6 +5,11 @@ import loadInitializers from 'ember-load-initializers';
 import config from 'super-rentals/config/environment';
 import { importSync, isDevelopingApp, macroCondition } from '@embroider/macros';
 import setupInspector from '@embroider/legacy-inspector-support/ember-source-4.12';
+import { setBuildURLConfig } from '@ember-data/request-utils';
+
+setBuildURLConfig({
+  namespace: 'api',
+});
 
 if (macroCondition(isDevelopingApp())) {
   importSync('./deprecation-workflow');
